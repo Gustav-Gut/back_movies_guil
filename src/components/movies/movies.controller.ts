@@ -1,17 +1,18 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
+import { SortMoviesDto } from './dto/movies.dto';
 
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
-  getMovies(@Query('sort') sort: string) {
-    return this.moviesService.getMovies(sort);
+  getMovies() {
+    return this.moviesService.getMovies();
   }
 
-  @Get(':id')
-  getMovie(@Param('id') id: string) {
-    return this.moviesService.getMovie(id);
+  @Get('popularity')
+  byPopularity(@Query() sortMoviesDto: SortMoviesDto) {
+    return this.moviesService.sortMoviesByPopularity(sortMoviesDto.order);
   }
 }

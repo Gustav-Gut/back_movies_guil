@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { FindSimilarMoviesDto, SortMoviesDto } from './dto/movies.dto';
+import { FindByActorDto, FindSimilarMoviesDto, SortMoviesDto } from './dto/movies.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -19,5 +19,10 @@ export class MoviesController {
   @Get('similar')
   findSimilarMovies(@Query() findSimilarMoviesDto: FindSimilarMoviesDto) {
     return this.moviesService.findSimilarMovies(findSimilarMoviesDto);
+  }
+
+  @Get('by-actor')
+  findMoviesByActor(@Query() findByActorDto: FindByActorDto) {
+    return this.moviesService.findMoviesByActor(findByActorDto.actor);
   }
 }

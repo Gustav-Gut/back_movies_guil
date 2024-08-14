@@ -56,6 +56,10 @@ export class MoviesService {
     });
   }
 
+  findMoviesByActor(actorName: string): Movie[] {
+    return this.movies.filter((movie) => movie.actors.includes(actorName));
+  }
+
   //get max values for estimate the popularity
   private getMaxValues() {
     const maxViewerCount = Math.max(...this.movies.map((movie) => movie.viewerCount));

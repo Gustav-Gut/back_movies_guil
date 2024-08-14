@@ -23,3 +23,13 @@ export class FindSimilarMoviesDto {
   @IsOptional()
   actors?: string[];
 }
+
+export class FindByActorDto {
+  @IsString()
+  @Transform(({ value }) => capitalizeEachWord(value))
+  actor: string;
+}
+
+function capitalizeEachWord(value: string): string {
+  return value.replace(/\b\w/g, (char) => char.toUpperCase());
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { Movie } from '../../interfaces/mavies.interface';
+import { Movie } from '../../interfaces/movies.interface';
 import { FindSimilarMoviesDto } from './dto/movies.dto';
 
 @Injectable()

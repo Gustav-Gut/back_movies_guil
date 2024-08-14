@@ -8,19 +8,23 @@ export class SortMoviesDto {
 }
 
 export class FindSimilarMoviesDto {
-  @Transform(({ value }) => [].concat(value), { toClassOnly: true })
-  @IsString({ each: true })
   @IsArray()
+  @IsString({ each: true })
+  @Transform(({ value }) => [].concat(value).map((v) => capitalizeEachWord(v)), {
+    toClassOnly: true,
+  })
   genres: string[];
 
   @IsNumber()
   @IsOptional()
   imdbRating?: number;
 
-  @Transform(({ value }) => [].concat(value || []), { toClassOnly: true })
-  @IsString({ each: true })
   @IsArray()
+  @IsString({ each: true })
   @IsOptional()
+  @Transform(({ value }) => [].concat(value || []).map((v) => capitalizeEachWord(v)), {
+    toClassOnly: true,
+  })
   actors?: string[];
 }
 
@@ -30,6 +34,10 @@ export class FindByActorDto {
   actor: string;
 }
 
-function capitalizeEachWord(value: string): string {
-  return value.replace(/\b\w/g, (char) => char.toUpperCase());
+function capitalizeEachWord(value: string | string[]): string | string[] {
+  if (Array.isArray(value)) {
+    return value.map((item) => item.replace(/\b\w/g, (char) => char.toUpperCase()));
+  } else {
+    return value.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 }

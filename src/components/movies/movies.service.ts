@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+
 import { Movie } from '../../interfaces/mavies.interface';
+import { FindSimilarMoviesDto } from './dto/movies.dto';
 
 @Injectable()
 export class MoviesService {
@@ -37,6 +39,23 @@ export class MoviesService {
       });
   }
 
+  findSimilarMovies(dto: FindSimilarMoviesDto): Movie[] {
+    return this.movies.filter((movie) => {
+      const genreMatch = dto.genres.every((genre) => movie.genres.includes(genre));
+      const actorMatch =
+        dto.actors && dto.actors.length > 0
+          ? dto.actors.every((actor) => movie.actors.includes(actor))
+          : true;
+      const ratingMatch =
+        dto.imdbRating !== undefined
+          ? this.calculateAverageRating(movie.ratings) >= dto.imdbRating
+          : true;
+
+      //TODO: check results with multiples actor and rating in request.
+      return genreMatch && actorMatch && ratingMatch;
+    });
+  }
+
   //get max values for estimate the popularity
   private getMaxValues() {
     const maxViewerCount = Math.max(...this.movies.map((movie) => movie.viewerCount));
@@ -57,5 +76,10 @@ export class MoviesService {
 
     //this calculate assign weight in the popularity
     return 0.5 * avgRating + 0.3 * normalizedViewerCount + 0.2 * normalizedRatingsCount;
+  }
+
+  //for evaluate similar is neccesary calculate ratings IMBD
+  private calculateAverageRating(ratings: number[]): number {
+    return ratings.reduce((acc, cur) => acc + cur, 0) / ratings.length;
   }
 }

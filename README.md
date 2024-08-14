@@ -26,6 +26,14 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+To run this backend project you need to use Node 20.9.0 and NPM 10.1.0
+
+The only special thing is the layout of the json file that contains the DB, but since the file is located in the project (db/movies.json) (outside the SRC folder!!!) there should not be any problem.
+
+That configuration should be enough. Next you just have to follow the instructions for setting up a Nest project.
+
+Attached is a configuration file for postman, in order to test the services available on port 3000 of localhost.
+
 ## Installation
 
 ```bash

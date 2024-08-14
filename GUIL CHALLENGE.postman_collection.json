@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "f8e6a2ca-5d23-4795-8366-981496235306",
+		"name": "GUIL CHALLENGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33989667"
+	},
+	"item": [
+		{
+			"name": "ALL MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BY POPULARITY",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies/popularity?order=DSC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"popularity"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "DSC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SIMILAR MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies/similar?genres=action&genres=war",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"similar"
+					],
+					"query": [
+						{
+							"key": "genres",
+							"value": "action"
+						},
+						{
+							"key": "genres",
+							"value": "war"
+						},
+						{
+							"key": "actors",
+							"value": "Reese Huxley",
+							"disabled": true
+						},
+						{
+							"key": "actors",
+							"value": "Skyler Chase",
+							"disabled": true
+						},
+						{
+							"key": "imdbRating",
+							"value": "4.5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BY ACTOR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies/by-actor?actor=Reese Huxley",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"by-actor"
+					],
+					"query": [
+						{
+							"key": "actor",
+							"value": "Reese Huxley"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
